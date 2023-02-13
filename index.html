@@ -3,6 +3,30 @@
 <head>
     <meta charset="utf-8">
     <title>Homepage</title>
+    <style>
+        /* Set the background color */
+        body {
+          background-color: #333333;
+        }
+        
+        /* Define the style for the light wave trail */
+        .trail {
+          position: absolute;
+          width: 10px;
+          height: 10px;
+          background-color: #ffffff;
+          opacity: 1;
+          transform: translate(-50%, -50%) rotate(45deg);
+          animation: fadeout 0.5s linear forwards;
+        }
+        
+        /* Animation to make the trail disappear after a few seconds */
+        @keyframes fadeout {
+          to {
+            opacity: 0;
+          }
+        }
+      </style>
 </head>
 <body>
 <h2>Recipe for foods</h2>
@@ -13,6 +37,23 @@
     <li><strong><a href="./pages/momo.html">Momo</a></strong></li>
     <li><strong><a href="./pages/panipuri.html">Panipuri</a></strong></li>
 </ul>
-
+<script>
+    // Add an event listener to track the mouse position
+    document.addEventListener("mousemove", function(event) {
+      // Create a new div element for the trail
+      var trail = document.createElement("div");
+      trail.classList.add("trail");
+      trail.style.left = event.clientX + "px";
+      trail.style.top = event.clientY + "px";
+      
+      // Append the trail to the body
+      document.body.appendChild(trail);
+      
+      // Remove the trail after a few seconds
+      setTimeout(function() {
+        trail.remove();
+      }, 500);
+    });
+  </script>
 </body>
 </html>
