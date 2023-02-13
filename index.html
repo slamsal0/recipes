@@ -30,7 +30,7 @@
 </head>
 <body>
 <h2>Recipe for foods</h2>
-<img src="./img/download.png" alt="picture of a chef">
+<img src="./img/download.png" alt=" picture of a chef">
 
 
 <ul>
@@ -38,13 +38,23 @@
     <li><strong><a href="./pages/panipuri.html">Panipuri</a></strong></li>
 </ul>
 <script>
-    // Add an event listener to track the mouse position
-    document.addEventListener("mousemove", function(event) {
+    // Function to create the trail
+    function createTrail(event) {
+      // Get the position of the mouse/finger
+      var x, y;
+      if (event.type === "mousemove") {
+        x = event.clientX;
+        y = event.clientY;
+      } else if (event.type === "touchmove") {
+        x = event.touches[0].clientX;
+        y = event.touches[0].clientY;
+      }
+      
       // Create a new div element for the trail
       var trail = document.createElement("div");
       trail.classList.add("trail");
-      trail.style.left = event.clientX + "px";
-      trail.style.top = event.clientY + "px";
+      trail.style.left = x + "px";
+      trail.style.top = y + "px";
       
       // Append the trail to the body
       document.body.appendChild(trail);
@@ -53,7 +63,11 @@
       setTimeout(function() {
         trail.remove();
       }, 500);
-    });
+    }
+    
+    // Add event listeners for mousemove and touchmove
+    document.addEventListener("mousemove", createTrail);
+    document.addEventListener("touchmove", createTrail);
   </script>
 </body>
 </html>
